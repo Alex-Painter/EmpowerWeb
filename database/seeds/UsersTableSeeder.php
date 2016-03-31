@@ -25,5 +25,10 @@ class UsersTableSeeder extends Seeder
                         'password' => Hash::make('Imogenisacunt'),
                         'department' => 'HR'
                                       ));
+User::create(array(
+		  'name' => 'Juliette',
+		  'password' => Hash::make('ilovemaths'),
+		  'department' => 'Kitchen'
+					));
     }
 }
