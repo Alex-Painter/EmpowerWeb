@@ -21,14 +21,9 @@ class UsersTableSeeder extends Seeder
                         'department' => 'IT'
                       ));
       User::create(array(
-                        'name' => 'Adam',
-                        'password' => Hash::make('Imogenisacunt'),
-                        'department' => 'HR'
-                                      ));
-User::create(array(
-		  'name' => 'Juliette',
-		  'password' => Hash::make('ilovemaths'),
-		  'department' => 'Kitchen'
-					));
+		                    'name' => 'Juliette',
+		                    'password' => Hash::make('ilovemaths'),
+		                    'department' => 'Kitchen'
+					            ));
     }
 }
