@@ -10,7 +10,7 @@ class Issue extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'name', 'location', 'picture', 'state'
+        'name', 'location', 'state'
     ];
 
     public function getPhoto(){

@@ -25,3 +25,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+================================
+
+When moving to production:
+- Create symlink from storage to public folder:
+e.g ln -s /Applications/XAMPP/htdocs/EmpowerWeb/storage/app/ /Applications/XAMPP/htdocs/EmpowerWeb/public/pictures/
+- Move contents of public folder outside EmpowerWeb folder (might mess with the above?)

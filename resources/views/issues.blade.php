@@ -15,9 +15,9 @@
     <tr>
       <td>{{ $issue->id }}</td>
       <td>{{ $issue->name }}</td>
-      <td>Location</td>
+      <td>{{ $issue->location }}</td>
       <td>{{ $issue->created_at }}</td>
-      <td><img src="pictures/{{ $issue->picture }}" style="width:150px;"></td>
+      <td><img src="pictures/app/{{ $issue->id }}.jpg" style="width:75px;"></td>
       <td>
         <div class="btn-group">
           <button type="button" class="btn btn-default">{{ $issue->state }}</button>
