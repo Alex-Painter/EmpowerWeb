@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use App\Issue;
 
 use App\Http\Requests;
@@ -39,7 +41,7 @@ class IssueController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
+    * Return all issues in database in JSON
     *
     * @return Response
     */
@@ -49,7 +51,7 @@ class IssueController extends Controller
    }
 
    /**
-    * Show the form for creating a new resource.
+    * Create a new issue from POST to domain/issue
     *
     * @return Response
     */
@@ -60,27 +62,19 @@ class IssueController extends Controller
      $location = $request->input('location');
      $base64 = $request->input('picture');
 
-     //$picture = base64_to_jpeg($base64, $picture);
+     //convert base64 string to jpeg
+     $jpg = (string) Image::make($base64)->encode('jpg', 75);
 
-     Issue::create(array(
+     $issue = Issue::create(array(
                        'name' => $name,
                        'location' => $location,
-                       'picture' => $base64,
                        'state' => "New",
                      ));
 
+      //picture is saved to storage with name 'id'.jpg returned from model 'create'
+      Storage::disk('local')->put($issue->id.'.jpg', $jpg);
+
       return response()->json(Issue::all());
 
-   }
-
-   private function base64_to_jpeg($base64String, $outputFile){
-     $stream = fopen($outputFile, "wb");
-
-     $data = explode(',', $base64String);
-
-     fwrite($stream, base64_decode($data[1]));
-     fclose($stream);
-
-     return $outputFile;
    }
 }
