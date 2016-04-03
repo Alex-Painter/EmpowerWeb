@@ -27,9 +27,11 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/issues', function () {
 
-      $issues = Issue::orderBy('created_at')->get();
+    $issues = Issue::orderBy('created_at')->get();
 
-      return view('issues', $issues)->with('issues', $issues);
+      return view('issues', $issues)
+            ->with('issues', $issues)
+            ->with('');
     });
 
     Route::get('/review/{id}', [
@@ -40,5 +42,15 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/close/{id}', [
       'as' => 'close', 'uses' => 'IssueController@close']);
+
+   Route::get('getPic/{filename}', [
+     'as' => 'getPic', 'uses' => 'IssueController@getPicture']);
+
+});
+
+Route::group(['middleware' => ['cors']], function() {
+
+  Route::resource('issue', 'IssueController');
+  Route::post('issue/create', 'IssueController@createIssue');
 
 });

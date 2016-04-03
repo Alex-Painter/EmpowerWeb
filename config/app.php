@@ -123,6 +123,8 @@ return [
 
     'providers' => [
 
+        'Barryvdh\Cors\ServiceProvider',
+
         /*
          * Laravel Framework Service Providers...
          */

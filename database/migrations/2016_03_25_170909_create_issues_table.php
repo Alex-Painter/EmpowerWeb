@@ -16,10 +16,9 @@ class CreateIssuesTable extends Migration
       Schema::create('issues', function (Blueprint $table) {
         $table->increments('id');
         $table->string('name');
-        $table->binary('picture');
+        $table->string('picture');
         $table->string('location');
         $table->string('state');
-        $table->rememberToken();
         $table->timestamps();
       });
 

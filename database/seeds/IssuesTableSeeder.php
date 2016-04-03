@@ -17,22 +17,24 @@ class IssuesTableSeeder extends Seeder
 
       Issue::create(array(
                         'name' => 'Ross Barkley',
-                        'picture' => ("pictures/1.png"),
+                        'picture' => ("1.png"),
                         'state' => ('New')
                       ));
+
       Issue::create(array(
                         'name' => 'Steven Naimar',
-                        'picture' => ("pictures/2.png"),
+                        'picture' => ("2.png"),
                         'state' => ('New')
                       ));
+
      Issue::create(array(
                         'name' => 'Dele Alli',
-                        'picture' => ("pictures/3.png"),
+                        'picture' => ("3.png"),
                         'state' => ('New')
                       ));
     Issue::create(array(
                         'name' => 'Jermain Defoe',
-                        'picture' => ("pictures/1.png"),
+                        'picture' => ("1.png"),
                         'state' => ('New')
                       ));
     }

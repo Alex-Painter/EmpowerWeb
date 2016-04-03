@@ -2,12 +2,13 @@
 
 @section('content')
 
-<table class="table table-hover">
+<table class="table">
   <tr>
     <th>Issue #</th>
     <th>Title</th>
     <th>Location</th>
     <th>Date Submitted</th>
+    <th>Picture</th>
     <th>State</th>
   </tr>
     @foreach ($issues as $issue)
@@ -15,7 +16,8 @@
       <td>{{ $issue->id }}</td>
       <td>{{ $issue->name }}</td>
       <td>Location</td>
-      <td>{{ $issue->created_at }}
+      <td>{{ $issue->created_at }}</td>
+      <td><img src="pictures/{{ $issue->picture }}" style="width:150px;"></td>
       <td>
         <div class="btn-group">
           <button type="button" class="btn btn-default">{{ $issue->state }}</button>
