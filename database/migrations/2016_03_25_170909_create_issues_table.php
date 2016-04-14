@@ -17,8 +17,10 @@ class CreateIssuesTable extends Migration
         $table->increments('id');
         $table->string('name');
         $table->string('picture');
-        $table->string('location');
+        $table->string('lat');
+        $table->string('long');
         $table->string('state');
+        $table->string('regID');
         $table->timestamps();
       });
 
@@ -31,6 +33,6 @@ class CreateIssuesTable extends Migration
      */
     public function down()
     {
-        //
+        //Schema::drop('issues');
     }
 }

@@ -125,6 +125,8 @@ return [
 
         'Barryvdh\Cors\ServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'Cornford\Googlmapper\MapperServiceProvider',
+        'Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider',
 
         /*
          * Laravel Framework Service Providers...
@@ -208,6 +210,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Image' => 'Intervention\Image\Facades\Image',
+        'Mapper' => 'Cornford\Googlmapper\Facades\MapperFacade',
+        'PushNotification' => 'Davibennun\LaravelPushNotification\Facades\PushNotification',
 
     ],
 

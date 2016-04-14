@@ -30,5 +30,16 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 When moving to production:
 - Create symlink from storage to public folder:
-e.g ln -s /Applications/XAMPP/htdocs/EmpowerWeb/storage/app/ /Applications/XAMPP/htdocs/EmpowerWeb/public/pictures/
+  - e.g ln -s /Applications/XAMPP/htdocs/EmpowerWeb/storage/app/ /Applications/XAMPP/htdocs/EmpowerWeb/public/pictures/
+
+- Sym link to pictures folder in same directory as EmpowerWeb.
+
 - Move contents of public folder outside EmpowerWeb folder (might mess with the above?)
+- run composer install
+  - composer clear-cache
+
+
+Installed packages:
+https://github.com/bradcornford/Googlmapper
+https://github.com/barryvdh/laravel-cors
+http://image.intervention.io/

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use Cornford\Googlmapper\Mapper;
+//use Davibennun\LaravelPushNotification\PushNotification;
+use PushNotification;
 use App\Issue;
+use Auth;
 
 use App\Http\Requests;
 
@@ -15,29 +19,56 @@ class IssueController extends Controller
       $issue = Issue::where('id', $id)->first();
       $issue->state = "Under Review";
       $issue->save();
+
+      $message = Auth::user()->name . " from the council has updated your issue: "
+      . $issue->name .
+      ". It is now under review. Thank you.";
+
+      $this->sendNotification($issue->regID, $message);
       return redirect('/issues');
     }
+
     public function forward($id){
       $issue = Issue::where('id', $id)->first();
       $issue->state = "Forwarded";
       $issue->save();
+
+      $message = Auth::user()->name . " from the council has updated your issue: "
+      . $issue->name .
+      ". It has now been forwarded on to the relevant department. Thank you:";
+
+      $this->sendNotification($issue->regID, $message);
       return redirect('/issues');
     }
+
     public function close($id){
       $issue = Issue::where('id', $id)->first();
       $issue->state = "Closed";
       $issue->save();
+
+      $message = Auth::user()->name . " from the council has updated your issue: "
+      . $issue->name .
+      ". It is now closed. Thank you.";
+
+      $this->sendNotification($issue->regID, $message);
       return redirect('/issues');
     }
 
-    public function getPic($filename){
+    public function sendNotification($regID, $message){
+      $device = PushNotification::Device($regID, array());
 
-      $file = Storage::disk('local')->get($filename);
+      $notifMessage = PushNotification::Message($message, array(
+        'badge' => 1,
+      ));
+      $app = PushNotification::app('empowerMobile');
 
-      return (new Response($file, 200)) ->header('Content-Type', 'data:image/png');
-    }
+      $new_client = new \Zend\Http\Client(null, array(
+                  'adapter' => 'Zend\Http\Client\Adapter\Socket',
+                  'sslverifypeer' => false
+                ));
+      $app->adapter->setHttpClient($new_client);
 
-    public function issueNumbers(){
+      $app->to($device)->send($notifMessage);
     }
 
     /**
@@ -59,22 +90,26 @@ class IssueController extends Controller
    {
 
      $name = $request->input('name');
-     $location = $request->input('location');
+     $lat = $request->input('lat');
+     $long = $request->input('long');
      $base64 = $request->input('picture');
+     $regID = $request->input('regID');
 
      //convert base64 string to jpeg
      $jpg = (string) Image::make($base64)->encode('jpg', 75);
 
      $issue = Issue::create(array(
                        'name' => $name,
-                       'location' => $location,
+                       'lat' => $lat,
+                       'long' => $long,
                        'state' => "New",
+                       'regID' => $regID,
                      ));
 
       //picture is saved to storage with name 'id'.jpg returned from model 'create'
       Storage::disk('local')->put($issue->id.'.jpg', $jpg);
 
-      return response()->json(Issue::all());
+      //return response()->json(Issue::all());
 
    }
 }

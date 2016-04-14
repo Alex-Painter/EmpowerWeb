@@ -27,11 +27,22 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/issues', function () {
 
-    $issues = Issue::orderBy('created_at')->get();
+    $issues = Issue::orderBy('created_at')->paginate(3);
 
       return view('issues', $issues)
-            ->with('issues', $issues)
-            ->with('');
+            ->with('issues', $issues);
+    });
+
+    Route::get('/analytics', function () {
+        return view('/analytics');
+    });
+
+    Route::get('/settings', function () {
+        return view('/settings');
+    });
+
+    Route::get('/admin', function () {
+        return view('/admin');
     });
 
     Route::get('/review/{id}', [
