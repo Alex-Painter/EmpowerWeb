@@ -64,7 +64,8 @@ class IssueController extends Controller
 
       $new_client = new \Zend\Http\Client(null, array(
                   'adapter' => 'Zend\Http\Client\Adapter\Socket',
-                  'sslverifypeer' => false
+                  //'sslverifypeer' => false
+                  'sslcapath' => '/etc/ssl/certs/'
                 ));
       $app->adapter->setHttpClient($new_client);
 
