@@ -9,7 +9,7 @@ return array(
         'service'     =>'apns'
     ),
     'empowerMobile' => array(
-        'environment' =>'production',
+        'environment' =>'development',
         'apiKey'      =>'AIzaSyCUthy-BH1YHjVjEvltuDc7QF0GT_AjmWI',
         'service'     =>'gcm'
     )

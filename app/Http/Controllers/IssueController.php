@@ -112,4 +112,11 @@ class IssueController extends Controller
       //return response()->json(Issue::all());
 
    }
+
+   public function send(){
+     $deviceToken = "eiIFNzphT1U:APA91bElXlxLxiQX5_nn51tRsS2zY81Sq2sKiPWS_Gq1zXLYn4oJJNqSgHpDQ4BXv8CprllV9WMBgL1Z7okqpk0oehCsvxdBywEOvMkSMOF_hMC8LZrabMc29UAzXhIuBPCVCtQc-6n_";
+     PushNotification::app('empowerMobile')
+                ->to($deviceToken)
+                ->send('Hello World, i`m a push message');
+   }
 }

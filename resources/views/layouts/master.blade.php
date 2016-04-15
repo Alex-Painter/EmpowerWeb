@@ -48,9 +48,10 @@
         <div class="row">
           <div class="sidebar-wrapper">
             <ul class="nav nav-stacked affix">
-              <li><a href="{{ url('/issues') }}">Issue Feed <span class="badge">42</span></a></li>
+              <li><a href="{{ url('/issues') }}">Issue Feed <span class="badge">to-do</span></a></li>
               <li><a href="{{ url('/analytics') }}">Analytics</a></li>
               <li><a href="{{ url('/settings') }}">Settings</a></li>
+              <li><a href="{{ route('/send') }}">Send Notification</a></li>
               </ul>
             </div>
 
