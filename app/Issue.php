@@ -12,8 +12,4 @@ class Issue extends Model
     protected $fillable = [
         'name', 'location', 'state', 'lat', 'long', 'regID'
     ];
-
-    public function getPhoto(){
-      return Storage::get('/pictures'.'/'.$this->picture.'.png');
-    }
 }

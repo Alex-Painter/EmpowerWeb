@@ -10,7 +10,7 @@ return array(
     ),
     'empowerMobile' => array(
         'environment' =>'development',
-        'apiKey'      =>'AIzaSyCUthy-BH1YHjVjEvltuDc7QF0GT_AjmWI',
+        'apiKey'      =>'AIzaSyCzoVnApOHXk3vdcdfOFtUB2iYy-F3hPsk',
         'service'     =>'gcm'
     )
 

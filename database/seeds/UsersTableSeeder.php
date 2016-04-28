@@ -13,16 +13,14 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-      DB::table('users')->delete();
-
       User::create(array(
                         'name' => 'admin',
                         'password' => Hash::make('h0ck3y'),
                         'department' => 'IT'
                       ));
       User::create(array(
-		                    'name' => 'Juliette',
-		                    'password' => Hash::make('ilovemaths'),
+		                    'name' => 'Gary',
+		                    'password' => Hash::make('c0ff33'),
 		                    'department' => 'Kitchen'
 					            ));
     }

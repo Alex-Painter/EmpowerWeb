@@ -40,7 +40,7 @@ class HomeController extends Controller
       if (Auth::attempt($credentials)){
         return redirect('/issues');
       }else{
-        return redirect('/');
+        return redirect('/')->with('message', 'Incorrect login, please try again.');
       }
     }
 

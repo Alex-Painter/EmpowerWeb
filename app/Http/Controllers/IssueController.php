@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Cornford\Googlmapper\Mapper;
-//use Davibennun\LaravelPushNotification\PushNotification;
 use PushNotification;
 use App\Issue;
 use Auth;
@@ -35,7 +34,7 @@ class IssueController extends Controller
 
       $message = Auth::user()->name . " from the council has updated your issue: "
       . $issue->name .
-      ". It has now been forwarded on to the relevant department. Thank you:";
+      ". It has now been forwarded on to the relevant department. Thank you.";
 
       $this->sendNotification($issue->regID, $message);
       return redirect('/issues');
@@ -58,18 +57,14 @@ class IssueController extends Controller
       $device = PushNotification::Device($regID, array());
 
       $notifMessage = PushNotification::Message($message, array(
-        'badge' => 1,
+        'title' => 'Update on your Issue'
       ));
-      $app = PushNotification::app('empowerMobile');
 
-      $new_client = new \Zend\Http\Client(null, array(
-                  'adapter' => 'Zend\Http\Client\Adapter\Socket',
-                  //'sslverifypeer' => false
-                  'sslcapath' => '/etc/ssl/certs/'
-                ));
-      $app->adapter->setHttpClient($new_client);
+      $app = PushNotification::app('empowerMobile')->to($regID);
 
-      $app->to($device)->send($notifMessage);
+      $app->adapter->setAdapterParameters(['sslverifypeer' => false]);
+
+      $app->send($notifMessage);
     }
 
     /**
@@ -112,12 +107,5 @@ class IssueController extends Controller
 
       //return response()->json(Issue::all());
 
-   }
-
-   public function send(){
-     $deviceToken = "eiIFNzphT1U:APA91bElXlxLxiQX5_nn51tRsS2zY81Sq2sKiPWS_Gq1zXLYn4oJJNqSgHpDQ4BXv8CprllV9WMBgL1Z7okqpk0oehCsvxdBywEOvMkSMOF_hMC8LZrabMc29UAzXhIuBPCVCtQc-6n_";
-     PushNotification::app('empowerMobile')
-                ->to($deviceToken)
-                ->send('Hello World, i`m a push message');
    }
 }

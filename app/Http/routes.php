@@ -57,9 +57,6 @@ Route::group(['middleware' => ['web']], function () {
    Route::get('getPic/{filename}', [
      'as' => 'getPic', 'uses' => 'IssueController@getPicture']);
 
-   Route::get('/send', [
-       'as' => '/send', 'uses' => 'IssueController@send']);
-
 });
 
 Route::group(['middleware' => ['cors']], function() {

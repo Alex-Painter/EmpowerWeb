@@ -20,7 +20,7 @@ class CreateIssuesTable extends Migration
         $table->string('lat');
         $table->string('long');
         $table->string('state');
-        $table->string('regID');
+        $table->string('token');
         $table->timestamps();
       });
 
