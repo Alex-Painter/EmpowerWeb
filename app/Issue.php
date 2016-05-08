@@ -10,6 +10,6 @@ class Issue extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'name', 'location', 'state', 'lat', 'long', 'regID'
+        'location', 'state', 'lat', 'long', 'regID', 'title', 'category'
     ];
 }

@@ -20,7 +20,7 @@ class IssueController extends Controller
       $issue->save();
 
       $message = Auth::user()->name . " from the council has updated your issue: "
-      . $issue->name .
+      . $issue->title .
       ". It is now under review. Thank you.";
 
       $this->sendNotification($issue->regID, $message);
@@ -33,7 +33,7 @@ class IssueController extends Controller
       $issue->save();
 
       $message = Auth::user()->name . " from the council has updated your issue: "
-      . $issue->name .
+      . $issue->title .
       ". It has now been forwarded on to the relevant department. Thank you.";
 
       $this->sendNotification($issue->regID, $message);
@@ -46,7 +46,7 @@ class IssueController extends Controller
       $issue->save();
 
       $message = Auth::user()->name . " from the council has updated your issue: "
-      . $issue->name .
+      . $issue->title .
       ". It is now closed. Thank you.";
 
       $this->sendNotification($issue->regID, $message);
@@ -85,25 +85,27 @@ class IssueController extends Controller
    public function store(Request $request)
    {
 
-     $name = $request->input('name');
+     $title = $request->input('title');
      $lat = $request->input('lat');
      $long = $request->input('long');
      $base64 = $request->input('picture');
-     $regID = $request->input('regID');
+     $regID = $request->input('token');
+     $category = $request->input('category');
 
      //convert base64 string to jpeg
      $jpg = (string) Image::make($base64)->encode('jpg', 75);
 
      $issue = Issue::create(array(
-                       'name' => $name,
+                       'title' => $title,
+                       'category' => $category,
                        'lat' => $lat,
                        'long' => $long,
                        'state' => "New",
-                       'regID' => $regID,
+                       'regID' => $regID
                      ));
 
       //picture is saved to storage with name 'id'.jpg returned from model 'create'
-      Storage::disk('local')->put($issue->id.'.jpg', $jpg);
+      Storage::disk('local')->put($issue->id . ".jpg", $jpg);
 
       //return response()->json(Issue::all());
 

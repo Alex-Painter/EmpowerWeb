@@ -77,7 +77,7 @@ async defer></script>
     @foreach ($issues as $issue)
     <tr>
       <td>{{ $issue->id }}</td>
-      <td>{{ $issue->name }}</td>
+      <td>{{ $issue->title }}</td>
       <td id='latlon{{ $issue-> id}}'>
         <span id='lat{{ $issue-> id}}' style="display: none;">{{ $issue-> lat}}</span>
         <span id='lon{{ $issue-> id}}' style="display: none;">{{ $issue-> long}}</span>
